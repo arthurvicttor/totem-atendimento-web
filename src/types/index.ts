@@ -25,7 +25,7 @@ export interface Product {
   category?: Category;
   ingredients: Ingredient[];
   available: boolean;
-  featured: boolean; // aparece nos banners/destaques
+  featured: boolean;
 }
 
 // Carrinho
