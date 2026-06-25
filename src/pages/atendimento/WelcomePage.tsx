@@ -14,106 +14,98 @@ export default function WelcomePage() {
   }
 
   return (
-    <div className="min-h-screen bg-brand-dark flex flex-col">
-      {/* ── Header ───────────────────────────────────────── */}
-      <header className="flex items-center justify-center py-8">
-        <motion.div
-          initial={{ opacity: 0, y: -20 }}
-          animate={{ opacity: 1, y: 0 }}
-          transition={{ duration: 0.5 }}
-          className="flex items-center gap-3"
-        >
-          <span className="text-5xl">🍔</span>
-          <h1 className="text-white text-4xl font-black tracking-tight">
-            BURGER<span className="text-brand-primary">FAST</span>
+    <div className="min-h-screen bg-brand-bg flex flex-col">
+      {/* Banner topo */}
+      <div className="h-48 bg-gradient-to-r from-amber-900 to-amber-700 flex items-center justify-between px-8">
+        <div>
+          <p className="text-brand-secondary font-black text-xs uppercase tracking-widest">
+            Oferta do dia
+          </p>
+          <h1 className="text-white font-black text-3xl leading-tight">
+            X-BURGUER
+            <br />
+            <span className="text-brand-secondary">+ FRITAS</span>
           </h1>
-        </motion.div>
-      </header>
+          <p className="text-white/70 text-sm mt-1">Por apenas R$ 29,90</p>
+        </div>
+        <span className="text-8xl drop-shadow-2xl">🍔</span>
+      </div>
 
-      {/* ── Banner principal ─────────────────────────────── */}
+      {/* Logo + saudação */}
       <motion.div
-        initial={{ opacity: 0, scale: 0.95 }}
-        animate={{ opacity: 1, scale: 1 }}
-        transition={{ duration: 0.5, delay: 0.2 }}
-        className="mx-6 rounded-3xl overflow-hidden bg-gradient-to-br from-brand-primary to-brand-secondary p-8 text-white text-center"
+        initial={{ opacity: 0, y: 10 }}
+        animate={{ opacity: 1, y: 0 }}
+        className="px-6 pt-8 pb-4 bg-white border-b border-gray-100"
       >
-        <p className="text-sm font-semibold uppercase tracking-widest opacity-80">
-          Oferta do dia
-        </p>
-        <h2 className="text-4xl font-black mt-1">X-Burguer + Fritas</h2>
-        <p className="text-6xl font-black mt-2">R$ 29,90</p>
-        <p className="text-sm opacity-75 mt-1">
-          Válido somente hoje • Retirada no balcão
-        </p>
+        <div className="flex items-center gap-2 mb-1">
+          <span className="text-3xl">🍔</span>
+          <h2 className="text-brand-dark font-black text-3xl">
+            BURGER<span className="text-brand-primary">FAST</span>
+          </h2>
+        </div>
+        <p className="text-brand-muted text-sm">Faça seu pedido rapidinho!</p>
       </motion.div>
 
-      {/* ── Chamada para ação ────────────────────────────── */}
-      <motion.div
-        initial={{ opacity: 0 }}
-        animate={{ opacity: 1 }}
-        transition={{ delay: 0.4 }}
-        className="text-center mt-10"
-      >
-        <p className="text-white/60 text-lg font-medium">
-          Toque para começar seu pedido
+      {/* Chamada */}
+      <div className="px-6 pt-8 pb-4">
+        <h3 className="text-brand-dark font-black text-2xl">
+          Como prefere seu pedido?
+        </h3>
+        <p className="text-brand-muted text-sm mt-1">
+          Toque em uma opção para continuar
         </p>
-        <motion.div
-          animate={{ scaleX: [1, 1.05, 1] }}
-          transition={{ repeat: Infinity, duration: 2 }}
-          className="mx-auto mt-3 h-1 w-16 rounded-full bg-brand-primary"
-        />
-      </motion.div>
+      </div>
 
-      {/* ── Botões de tipo de pedido ─────────────────────── */}
-      <div className="flex gap-4 mx-6 mt-10">
+      {/* Botões */}
+      <div className="flex gap-4 px-6">
         <motion.button
-          initial={{ opacity: 0, x: -30 }}
-          animate={{ opacity: 1, x: 0 }}
-          transition={{ delay: 0.5 }}
+          initial={{ opacity: 0, y: 20 }}
+          animate={{ opacity: 1, y: 0 }}
+          transition={{ delay: 0.2 }}
           whileTap={{ scale: 0.97 }}
           onClick={() => handleSelectType("DINE_IN")}
-          className="flex-1 bg-brand-card border-2 border-white/10 hover:border-brand-primary rounded-3xl p-8 flex flex-col items-center gap-4 transition-all duration-200 group cursor-pointer"
+          className="flex-1 bg-white rounded-3xl p-8 flex flex-col items-center gap-4 border-2 border-gray-100 hover:border-brand-primary shadow-sm hover:shadow-md transition-all duration-200 group"
         >
           <div className="w-20 h-20 rounded-2xl bg-brand-primary/10 group-hover:bg-brand-primary/20 flex items-center justify-center transition-colors">
-            <UtensilsCrossed className="text-brand-primary" size={40} />
+            <UtensilsCrossed className="text-brand-primary" size={38} />
           </div>
           <div className="text-center">
-            <p className="text-white text-2xl font-black">Comer Aqui</p>
-            <p className="text-white/50 text-sm mt-1">
+            <p className="text-brand-dark text-xl font-black">Comer Aqui</p>
+            <p className="text-brand-muted text-xs mt-1">
               Retire no balcão e sente-se
             </p>
           </div>
         </motion.button>
 
         <motion.button
-          initial={{ opacity: 0, x: 30 }}
-          animate={{ opacity: 1, x: 0 }}
-          transition={{ delay: 0.5 }}
+          initial={{ opacity: 0, y: 20 }}
+          animate={{ opacity: 1, y: 0 }}
+          transition={{ delay: 0.3 }}
           whileTap={{ scale: 0.97 }}
           onClick={() => handleSelectType("TAKEOUT")}
-          className="flex-1 bg-brand-card border-2 border-white/10 hover:border-brand-primary rounded-3xl p-8 flex flex-col items-center gap-4 transition-all duration-200 group cursor-pointer"
+          className="flex-1 bg-white rounded-3xl p-8 flex flex-col items-center gap-4 border-2 border-gray-100 hover:border-brand-primary shadow-sm hover:shadow-md transition-all duration-200 group"
         >
           <div className="w-20 h-20 rounded-2xl bg-brand-secondary/10 group-hover:bg-brand-secondary/20 flex items-center justify-center transition-colors">
-            <ShoppingBag className="text-brand-secondary" size={40} />
+            <ShoppingBag className="text-brand-secondary" size={38} />
           </div>
           <div className="text-center">
-            <p className="text-white text-2xl font-black">Retirar</p>
-            <p className="text-white/50 text-sm mt-1">Levo para viagem</p>
+            <p className="text-brand-dark text-xl font-black">Retirar</p>
+            <p className="text-brand-muted text-xs mt-1">Levo para viagem</p>
           </div>
         </motion.button>
       </div>
 
-      {/* ── Footer ───────────────────────────────────────── */}
-      <motion.footer
+      {/* Footer */}
+      <motion.div
         initial={{ opacity: 0 }}
         animate={{ opacity: 1 }}
-        transition={{ delay: 0.7 }}
+        transition={{ delay: 0.5 }}
         className="mt-auto py-6 text-center"
       >
-        <p className="text-white/20 text-xs">
+        <p className="text-brand-muted/40 text-xs">
           Toque em qualquer opção para continuar
         </p>
-      </motion.footer>
+      </motion.div>
     </div>
   );
 }
