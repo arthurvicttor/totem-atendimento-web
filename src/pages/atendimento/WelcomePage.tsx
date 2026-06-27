@@ -26,7 +26,7 @@ export default function WelcomePage() {
             <br />
             <span className="text-brand-secondary">+ FRITAS</span>
           </h1>
-          <p className="text-white/70 text-sm mt-1">Por apenas R$ 29,90</p>
+          <p className="text-white/70 text-sm mt-1">Por apenas R$ 39,90</p>
         </div>
         <span className="text-8xl drop-shadow-2xl">🍔</span>
       </div>
@@ -43,7 +43,7 @@ export default function WelcomePage() {
             BURGER<span className="text-brand-primary">FAST</span>
           </h2>
         </div>
-        <p className="text-brand-muted text-sm">Faça seu pedido rapidinho!</p>
+        <p className="text-brand-muted text-sm">Faça seu pedido aqui mesmo!</p>
       </motion.div>
 
       {/* Chamada */}
