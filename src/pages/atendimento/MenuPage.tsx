@@ -66,7 +66,6 @@ export default function MenuPage() {
         </div>
       </div>
 
-      {/* ── Layout principal: sidebar + grid ────────────── */}
       <div className="flex flex-1 gap-0">
         {/* Sidebar de categorias */}
         <div className="w-44 shrink-0 bg-white border-r border-gray-100 sticky top-0 h-screen overflow-y-auto">
