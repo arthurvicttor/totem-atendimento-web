@@ -14,7 +14,31 @@ export default function WelcomePage() {
   }
 
   return (
-    <div className="min-h-screen bg-brand-bg flex flex-col">
+    <div className="bg-surface text-on-surface">
+      {/* Header */}
+      <header class="bg-surface dark:bg-surface text-primary dark:text-primary-fixed-dim w-full top-0 left-0 border-b-4 border-on-surface flat no shadows flex justify-between items-center px-10 h-24 w-full z-50">
+        <div class="font-headline-lg text-headline-lg font-black text-primary dark:text-primary-fixed-dim">
+          Crazy Taste
+        </div>
+        <div class="flex gap-8">
+          <div class="flex items-center gap-1 cursor-pointer hover:bg-surface-container-high transition-transform active:scale-95 p-2 rounded-full">
+            <span class="font-label-md text-label-md hidden md:block">
+              idioma
+            </span>
+          </div>
+          <div class="flex items-center gap-1 cursor-pointer hover:bg-surface-container-high transition-transform active:scale-95 p-2 rounded-full">
+            <span class="font-label-md text-label-md hidden md:block">
+              informações
+            </span>
+          </div>
+          <div class="flex items-center gap-1 cursor-pointer hover:bg-surface-container-high transition-transform active:scale-95 p-2 rounded-full">
+            <span class="font-label-md text-label-md hidden md:block">
+              ajuda
+            </span>
+          </div>
+        </div>
+      </header>
+
       {/* Banner topo */}
       <div className="h-48 bg-gradient-to-r from-amber-900 to-amber-700 flex items-center justify-between px-8">
         <div>
