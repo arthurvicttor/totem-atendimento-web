@@ -5,49 +5,52 @@ import type { Product } from "@/types";
 
 interface ProductCardProps {
   product: Product;
+  index?: number;
 }
 
-export function ProductCard({ product }: ProductCardProps) {
+export function ProductCard({ product, index = 0 }: ProductCardProps) {
   const addItem = useCartStore((s) => s.addItem);
 
   return (
-    <motion.button
-      initial={{ opacity: 0, y: 16 }}
+    <motion.div
+      initial={{ opacity: 0, y: 20 }}
       animate={{ opacity: 1, y: 0 }}
-      whileTap={{ scale: 0.97 }}
+      transition={{ delay: index * 0.1 }}
+      className="bg-surface-container-lowest border-4 border-on-surface cursor-pointer group active:scale-[0.98] transition-transform overflow-hidden"
       onClick={() => addItem(product)}
-      className="bg-white rounded-2xl overflow-hidden flex flex-col border border-gray-100 shadow-sm hover:shadow-md hover:border-brand-primary/30 transition-all duration-200 text-left w-full"
     >
-      {/* Imagem centralizada */}
-      <div className="relative h-40 bg-gray-50 flex items-center justify-center p-2">
-        {product.image ? (
-          <img
-            src={product.image}
-            alt={product.name}
-            className="w-full h-full object-contain drop-shadow-md"
-          />
-        ) : (
-          <span className="text-6xl">🍔</span>
-        )}
-        {product.featured && (
-          <span className="absolute top-2 left-2 bg-brand-secondary text-white text-xs font-bold px-2 py-0.5 rounded-full">
-            ⭐ Destaque
-          </span>
-        )}
-      </div>
+      {/* Imagem */}
+      <div
+        className="h-64 w-full bg-cover bg-center transition-transform duration-300 group-hover:scale-105"
+        style={{ backgroundImage: `url('${product.image}')` }}
+      />
 
-      {/* Info */}
-      <div className="p-3 flex flex-col gap-1">
-        <h3 className="text-brand-dark font-bold text-sm leading-tight line-clamp-2">
-          {product.name}
-        </h3>
-        <div className="mt-1">
-          <p className="text-brand-muted text-xs">a partir de</p>
-          <p className="text-brand-dark font-black text-base">
+      {/* Conteúdo */}
+      <div className="p-6">
+        <div className="flex justify-between items-start mb-2">
+          <h3 className="font-bold text-xl text-on-surface leading-tight">
+            {product.name}
+          </h3>
+          {product.featured && (
+            <span className="bg-secondary text-on-secondary px-2 py-1 text-xs font-bold uppercase shrink-0 ml-2">
+              Destaque
+            </span>
+          )}
+        </div>
+
+        <p className="text-sm text-on-surface-variant mb-6 line-clamp-2 leading-relaxed">
+          {product.description}
+        </p>
+
+        <div className="flex justify-between items-center">
+          <span className="font-black text-2xl text-primary">
             {formatCurrency(product.price)}
-          </p>
+          </span>
+          <div className="bg-primary text-on-primary w-12 h-12 flex items-center justify-center">
+            <span className="material-symbols-outlined text-3xl">add</span>
+          </div>
         </div>
       </div>
-    </motion.button>
+    </motion.div>
   );
 }

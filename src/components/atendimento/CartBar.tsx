@@ -1,5 +1,4 @@
-import { ShoppingCart } from "lucide-react";
-import { motion, AnimatePresence } from "framer-motion";
+import { AnimatePresence, motion } from "framer-motion";
 import { useNavigate } from "react-router-dom";
 import { useCartStore } from "@/stores/cartStore";
 import { formatCurrency } from "@/utils/formatCurrency";
@@ -15,30 +14,35 @@ export function CartBar() {
   return (
     <AnimatePresence>
       {totalItems > 0 && (
-        <motion.div
-          initial={{ y: 100, opacity: 0 }}
-          animate={{ y: 0, opacity: 1 }}
-          exit={{ y: 100, opacity: 0 }}
-          className="fixed bottom-0 left-0 right-0 z-50 p-4 bg-white border-t border-gray-100 shadow-2xl"
+        <motion.footer
+          initial={{ y: 128 }}
+          animate={{ y: 0 }}
+          exit={{ y: 128 }}
+          className="fixed bottom-0 left-0 w-full z-50 bg-inverse-surface h-32 border-t-4 border-on-surface flex justify-between items-center px-10 py-4"
         >
+          <div className="flex flex-col">
+            <span className="text-sm text-inverse-on-surface font-medium">
+              Resumo do Pedido
+            </span>
+            <div className="flex items-center gap-2 mt-1">
+              <span className="material-symbols-outlined text-secondary-container">
+                shopping_cart
+              </span>
+              <span className="font-bold text-2xl text-white">
+                {totalItems} {totalItems === 1 ? "Item" : "Itens"} •{" "}
+                {formatCurrency(total)}
+              </span>
+            </div>
+          </div>
+
           <button
             onClick={() => navigate("/cart")}
-            className="w-full bg-brand-primary rounded-2xl p-4 flex items-center justify-between active:scale-98 transition-transform"
+            className="bg-primary-container text-on-primary-container flex items-center gap-4 px-12 py-6 font-bold text-sm active:scale-95 transition-transform hover:brightness-110 uppercase"
           >
-            <div className="flex items-center gap-3">
-              <div className="relative">
-                <ShoppingCart size={22} className="text-white" />
-                <span className="absolute -top-2 -right-2 bg-white text-brand-primary text-xs font-black w-5 h-5 rounded-full flex items-center justify-center">
-                  {totalItems}
-                </span>
-              </div>
-              <span className="text-white font-bold text-base">Ver pedido</span>
-            </div>
-            <span className="text-white font-black text-lg">
-              {formatCurrency(total)}
-            </span>
+            <span className="material-symbols-outlined">payments</span>
+            Finalizar
           </button>
-        </motion.div>
+        </motion.footer>
       )}
     </AnimatePresence>
   );
