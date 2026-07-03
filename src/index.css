@@ -1,12 +1,30 @@
 @import "tailwindcss";
+@import url("https://fonts.googleapis.com/css2?family=Inter:wght@400;500;600;700;900&display=swap");
+@import url("https://fonts.googleapis.com/icon?family=Material+Symbols+Outlined");
 
 @theme {
-  --color-brand-primary: #c8102e;
-  --color-brand-secondary: #f5a623;
-  --color-brand-dark: #1a1a1a;
-  --color-brand-card: #ffffff;
-  --color-brand-bg: #f2f2f2;
-  --color-brand-sidebar: #ffffff;
-  --color-brand-muted: #6b6b6b;
-  --color-brand-active: #3d1f00;
+  /* Cores principais */
+  --color-primary: #1b1b1b;
+  --color-on-primary: #ffffff;
+  --color-primary-container: #f5c842;
+  --color-on-primary-container: #1b1b1b;
+
+  --color-secondary: #e63946;
+  --color-on-secondary: #ffffff;
+  --color-secondary-container: #ffd6d6;
+  --color-on-secondary-container: #5c0000;
+
+  --color-surface: #ffffff;
+  --color-on-surface: #1b1b1b;
+  --color-on-surface-variant: #6b6b6b;
+
+  --color-surface-container: #f2f2f2;
+  --color-surface-container-high: #e5e5e5;
+  --color-surface-container-lowest: #ffffff;
+  --color-surface-variant: #ebebeb;
+
+  --color-background: #f7f7f7;
+
+  --color-inverse-surface: #1b1b1b;
+  --color-inverse-on-surface: #f2f2f2;
 }
