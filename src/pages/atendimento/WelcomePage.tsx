@@ -1,135 +1,130 @@
+import { useEffect } from "react";
 import { useNavigate } from "react-router-dom";
 import { motion } from "framer-motion";
-import { UtensilsCrossed, ShoppingBag } from "lucide-react";
-import { useOrderStore } from "@/stores/orderStore";
-import type { OrderType } from "@/types";
 
 export default function WelcomePage() {
   const navigate = useNavigate();
-  const setOrderType = useOrderStore((s) => s.setOrderType);
 
-  function handleSelectType(type: OrderType) {
-    setOrderType(type);
-    navigate("/menu");
-  }
+  // Efeito parallax no background
+  useEffect(() => {
+    const handleMouseMove = (e: MouseEvent) => {
+      const x = (window.innerWidth / 2 - e.pageX) / 50;
+      const y = (window.innerHeight / 2 - e.pageY) / 50;
+      const bg = document.querySelector('[data-alt*="burger"]') as HTMLElement;
+      if (bg) {
+        bg.style.transform = `scale(1.1) translate(${x}px, ${y}px)`;
+      }
+    };
+
+    // Auto-refresh após inatividade (padrão para quiosques)
+    let timeout: NodeJS.Timeout;
+    function resetTimer() {
+      clearTimeout(timeout);
+      timeout = setTimeout(() => {
+        // Lógica de reset pode ser adicionada aqui
+        console.log("Inatividade detectada");
+      }, 60000); // 1 minuto
+    }
+
+    document.addEventListener("mousemove", handleMouseMove);
+    document.addEventListener("mousemove", resetTimer);
+    document.addEventListener("keypress", resetTimer);
+
+    return () => {
+      document.removeEventListener("mousemove", handleMouseMove);
+      document.removeEventListener("mousemove", resetTimer);
+      document.removeEventListener("keypress", resetTimer);
+      clearTimeout(timeout);
+    };
+  }, []);
 
   return (
-    <div className="bg-surface text-on-surface">
-      {/* Header */}
-      <header class="bg-surface dark:bg-surface text-primary dark:text-primary-fixed-dim w-full top-0 left-0 border-b-4 border-on-surface flat no shadows flex justify-between items-center px-10 h-24 w-full z-50">
-        <div class="font-headline-lg text-headline-lg font-black text-primary dark:text-primary-fixed-dim">
-          Crazy Taste
+    <div className="bg-surface text-on-surface overflow-hidden h-screen w-screen selection:bg-primary-fixed">
+      {/* Transactional/Splash Screen - Full Hero Background */}
+      <div className="relative w-full h-full flex flex-col items-center justify-between py-20 px-10">
+        {/* Hero Image Container (Background) */}
+        <div className="absolute inset-0 z-0">
+          <div
+            className="w-full h-full bg-cover bg-center scale-105 transform"
+            data-alt="Hambúrguer gourmet hiper-realista com múltiplas camadas de carne grelhada, queijo cheddar derretido, alface crocante e tomates maduros"
+            style={{
+              backgroundImage:
+                "url('https://lh3.googleusercontent.com/aida-public/AB6AXuAfgSZvjSkPUtN2WcGKqeV5WKKB050OZC5m4tLtEOWUYflSvj0kBvu_7hC9mLQ1kh8KsO1LAVeg2D4TMjI7yJr8lHUi7gZ8tKoLMqcFuDmzvrKx3N-f-JOpOziKv5Bdx6py9RuYw3o3OCil3in4ECmNyvp3XL5WW9ifhHF39svO-5Eqml2nEwQIk9t4PlHtQywt7AY4a9vkYmTaLcTlyQ5q2--qSecmMHszAQh9h864e9h_e0M3fqic_e3w5duWsEjFz09V5rpDg54')",
+            }}
+          />
+          {/* Gradient Overlay for Legibility */}
+          <div className="absolute inset-0 bg-gradient-to-t from-black/80 via-black/20 to-black/60" />
         </div>
-        <div class="flex gap-8">
-          <div class="flex items-center gap-1 cursor-pointer hover:bg-surface-container-high transition-transform active:scale-95 p-2 rounded-full">
-            <span class="font-label-md text-label-md hidden md:block">
-              idioma
-            </span>
-          </div>
-          <div class="flex items-center gap-1 cursor-pointer hover:bg-surface-container-high transition-transform active:scale-95 p-2 rounded-full">
-            <span class="font-label-md text-label-md hidden md:block">
-              informações
-            </span>
-          </div>
-          <div class="flex items-center gap-1 cursor-pointer hover:bg-surface-container-high transition-transform active:scale-95 p-2 rounded-full">
-            <span class="font-label-md text-label-md hidden md:block">
-              ajuda
-            </span>
-          </div>
-        </div>
-      </header>
 
-      {/* Banner topo */}
-      <div className="h-48 bg-gradient-to-r from-amber-900 to-amber-700 flex items-center justify-between px-8">
-        <div>
-          <p className="text-brand-secondary font-black text-xs uppercase tracking-widest">
-            Oferta do dia
-          </p>
-          <h1 className="text-white font-black text-3xl leading-tight">
-            X-BURGUER
-            <br />
-            <span className="text-brand-secondary">+ FRITAS</span>
-          </h1>
-          <p className="text-white/70 text-sm mt-1">Por apenas R$ 39,90</p>
-        </div>
-        <span className="text-8xl drop-shadow-2xl">🍔</span>
-      </div>
-
-      {/* Logo + saudação */}
-      <motion.div
-        initial={{ opacity: 0, y: 10 }}
-        animate={{ opacity: 1, y: 0 }}
-        className="px-6 pt-8 pb-4 bg-white border-b border-gray-100"
-      >
-        <div className="flex items-center gap-2 mb-1">
-          <span className="text-3xl">🍔</span>
-          <h2 className="text-brand-dark font-black text-3xl">
-            BURGER<span className="text-brand-primary">FAST</span>
-          </h2>
-        </div>
-        <p className="text-brand-muted text-sm">Faça seu pedido aqui mesmo!</p>
-      </motion.div>
-
-      {/* Chamada */}
-      <div className="px-6 pt-8 pb-4">
-        <h3 className="text-brand-dark font-black text-2xl">
-          Como prefere seu pedido?
-        </h3>
-        <p className="text-brand-muted text-sm mt-1">
-          Toque em uma opção para continuar
-        </p>
-      </div>
-
-      {/* Botões */}
-      <div className="flex gap-4 px-6">
-        <motion.button
-          initial={{ opacity: 0, y: 20 }}
+        {/* Top Header / Brand Identity */}
+        <motion.header
+          initial={{ opacity: 0, y: -20 }}
           animate={{ opacity: 1, y: 0 }}
-          transition={{ delay: 0.2 }}
-          whileTap={{ scale: 0.97 }}
-          onClick={() => handleSelectType("DINE_IN")}
-          className="flex-1 bg-white rounded-3xl p-8 flex flex-col items-center gap-4 border-2 border-gray-100 hover:border-brand-primary shadow-sm hover:shadow-md transition-all duration-200 group"
+          transition={{ duration: 0.6 }}
+          className="relative z-10 w-full flex justify-center items-center"
         >
-          <div className="w-20 h-20 rounded-2xl bg-brand-primary/10 group-hover:bg-brand-primary/20 flex items-center justify-center transition-colors">
-            <UtensilsCrossed className="text-brand-primary" size={38} />
+          <div className="flex flex-col items-center gap-2">
+            <span className="font-headline-lg text-headline-lg font-black text-primary drop-shadow-[0_4px_4px_rgba(0,0,0,0.5)] tracking-tighter uppercase">
+              Crazy Taste
+            </span>
+            <span className="font-label-xl text-label-xl text-on-primary-fixed uppercase tracking-widest px-4 py-1 bg-primary rounded-sm">
+              Burger &amp; Grill
+            </span>
           </div>
-          <div className="text-center">
-            <p className="text-brand-dark text-xl font-black">Comer Aqui</p>
-            <p className="text-brand-muted text-xs mt-1">
-              Retire no balcão e sente-se
+        </motion.header>
+
+        {/* Central Action Area */}
+        <motion.main
+          initial={{ opacity: 0, scale: 0.9 }}
+          animate={{ opacity: 1, scale: 1 }}
+          transition={{ duration: 0.6, delay: 0.2 }}
+          className="relative z-10 flex flex-col items-center justify-center text-center"
+        >
+          <div className="mb-12">
+            <h1 className="font-display-xl text-display-xl text-on-primary mb-4 text-shadow-lg">
+              COM
+              <br />
+              FOME?
+            </h1>
+            <p className="font-body-lg text-body-lg text-on-primary-container max-w-md mx-auto opacity-90">
+              Ingredientes frescos, serviço ultra rápido. Sua refeição perfeita
+              está a apenas um toque de distância.
             </p>
           </div>
-        </motion.button>
 
-        <motion.button
+          {/* PRIMARY ACTION BUTTON (The Anchor) */}
+          <button
+            onClick={() => navigate("/menu")}
+            className="group relative flex items-center justify-center bg-primary text-on-primary font-headline-md text-headline-md h-32 px-24 rounded-full shadow-2xl transition-all duration-300 active:scale-95 animate-pulse-gentle hover:bg-primary-container overflow-hidden"
+          >
+            <span className="relative z-10 uppercase">Toque para Começar</span>
+            <div className="absolute inset-0 bg-white/10 scale-x-0 group-hover:scale-x-100 transition-transform origin-left duration-500" />
+          </button>
+        </motion.main>
+
+        {/* Footer */}
+        <motion.footer
           initial={{ opacity: 0, y: 20 }}
           animate={{ opacity: 1, y: 0 }}
-          transition={{ delay: 0.3 }}
-          whileTap={{ scale: 0.97 }}
-          onClick={() => handleSelectType("TAKEOUT")}
-          className="flex-1 bg-white rounded-3xl p-8 flex flex-col items-center gap-4 border-2 border-gray-100 hover:border-brand-primary shadow-sm hover:shadow-md transition-all duration-200 group"
-        >
-          <div className="w-20 h-20 rounded-2xl bg-brand-secondary/10 group-hover:bg-brand-secondary/20 flex items-center justify-center transition-colors">
-            <ShoppingBag className="text-brand-secondary" size={38} />
-          </div>
-          <div className="text-center">
-            <p className="text-brand-dark text-xl font-black">Retirar</p>
-            <p className="text-brand-muted text-xs mt-1">Levo para viagem</p>
-          </div>
-        </motion.button>
+          transition={{ duration: 0.6, delay: 0.4 }}
+          className="relative z-10 w-full flex justify-between items-end"
+        ></motion.footer>
       </div>
 
-      {/* Footer */}
-      <motion.div
-        initial={{ opacity: 0 }}
-        animate={{ opacity: 1 }}
-        transition={{ delay: 0.5 }}
-        className="mt-auto py-6 text-center"
-      >
-        <p className="text-brand-muted/40 text-xs">
-          Toque em qualquer opção para continuar
-        </p>
-      </motion.div>
+      <div className="fixed inset-0 pointer-events-none opacity-20 z-0" />
+
+      <style>{`
+        @keyframes pulse-gentle {
+          0%, 100% { transform: scale(1); }
+          50% { transform: scale(1.03); }
+        }
+        .animate-pulse-gentle {
+          animation: pulse-gentle 2s ease-in-out infinite;
+        }
+        .text-shadow-lg {
+          text-shadow: 0 4px 12px rgba(0,0,0,0.5);
+        }
+      `}</style>
     </div>
   );
 }
