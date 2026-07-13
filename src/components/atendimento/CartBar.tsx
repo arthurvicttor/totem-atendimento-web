@@ -37,7 +37,7 @@ export function CartBar() {
 
           <button
             onClick={() => navigate("/cart")}
-            className="bg-primary-container text-on-primary-container flex items-center gap-4 px-12 py-6 font-bold text-sm active:scale-95 transition-transform hover:brightness-110 uppercase"
+            className="bg-primary-container text-on-primary-container flex items-center gap-4 px-12 py-6 font-bold text-sm active:scale-95 transition-transform hover:brightness-110 uppercase cursor-pointer"
           >
             <span className="material-symbols-outlined">payments</span>
             Finalizar
