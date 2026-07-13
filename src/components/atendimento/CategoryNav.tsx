@@ -32,7 +32,7 @@ export function CategoryNav({
             key={category.id}
             onClick={() => onSelect(category.id)}
             className={cn(
-              "w-full flex flex-col items-center py-8 gap-2 transition-all duration-150 active:translate-x-1 border-l-4",
+              "w-full flex flex-col items-center py-8 gap-2 transition-all duration-150 active:translate-x-1 border-l-4 cursor-pointer",
               activeId === category.id
                 ? "bg-primary text-on-primary border-l-secondary-container"
                 : "text-on-surface-variant hover:bg-surface-variant border-l-transparent",
