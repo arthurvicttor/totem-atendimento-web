@@ -17,7 +17,7 @@ export default function WelcomePage() {
     };
 
     // Auto-refresh após inatividade (padrão para quiosques)
-    let timeout: NodeJS.Timeout;
+    let timeout: ReturnType<typeof setTimeout>;
     function resetTimer() {
       clearTimeout(timeout);
       timeout = setTimeout(() => {
@@ -40,9 +40,7 @@ export default function WelcomePage() {
 
   return (
     <div className="bg-surface text-on-surface overflow-hidden h-screen w-screen selection:bg-primary-fixed">
-      {/* Transactional/Splash Screen - Full Hero Background */}
-      <div className="relative w-full h-full flex flex-col items-center justify-between py-20 px-10">
-        {/* Hero Image Container (Background) */}
+      <div className="relative w-full h-full flex flex-col items-center justify-between py-10 px-10">
         <div className="absolute inset-0 z-0">
           <div
             className="w-full h-full bg-cover bg-center scale-105 transform"
@@ -52,11 +50,9 @@ export default function WelcomePage() {
                 "url('https://lh3.googleusercontent.com/aida-public/AB6AXuAfgSZvjSkPUtN2WcGKqeV5WKKB050OZC5m4tLtEOWUYflSvj0kBvu_7hC9mLQ1kh8KsO1LAVeg2D4TMjI7yJr8lHUi7gZ8tKoLMqcFuDmzvrKx3N-f-JOpOziKv5Bdx6py9RuYw3o3OCil3in4ECmNyvp3XL5WW9ifhHF39svO-5Eqml2nEwQIk9t4PlHtQywt7AY4a9vkYmTaLcTlyQ5q2--qSecmMHszAQh9h864e9h_e0M3fqic_e3w5duWsEjFz09V5rpDg54')",
             }}
           />
-          {/* Gradient Overlay for Legibility */}
-          <div className="absolute inset-0 bg-gradient-to-t from-black/80 via-black/20 to-black/60" />
+          <div className="absolute inset-0 bg-linear-to-t from-black/80 via-black/20 to-black/60" />
         </div>
 
-        {/* Top Header / Brand Identity */}
         <motion.header
           initial={{ opacity: 0, y: -20 }}
           animate={{ opacity: 1, y: 0 }}
@@ -73,7 +69,6 @@ export default function WelcomePage() {
           </div>
         </motion.header>
 
-        {/* Central Action Area */}
         <motion.main
           initial={{ opacity: 0, scale: 0.9 }}
           animate={{ opacity: 1, scale: 1 }}
@@ -86,16 +81,15 @@ export default function WelcomePage() {
               <br />
               FOME?
             </h1>
-            <p className="font-body-lg text-body-lg text-on-primary-container max-w-md mx-auto opacity-90">
+            <p className="font-body-lg text-body-lg text-on-primary max-w-md mx-auto opacity-90">
               Ingredientes frescos, serviço ultra rápido. Sua refeição perfeita
               está a apenas um toque de distância.
             </p>
           </div>
 
-          {/* PRIMARY ACTION BUTTON (The Anchor) */}
           <button
             onClick={() => navigate("/menu")}
-            className="group relative flex items-center justify-center bg-primary text-on-primary font-headline-md text-headline-md h-32 px-24 rounded-full shadow-2xl transition-all duration-300 active:scale-95 animate-pulse-gentle hover:bg-primary-container overflow-hidden"
+            className="group relative flex items-center justify-center bg-primary text-on-primary font-headline-md text-headline-md h-32 px-24 rounded-full shadow-2xl transition-all duration-300 active:scale-95 animate-pulse-gentle hover:bg-primary-container overflow-hidden cursor-pointer"
           >
             <span className="relative z-10 uppercase">Toque para Começar</span>
             <div className="absolute inset-0 bg-white/10 scale-x-0 group-hover:scale-x-100 transition-transform origin-left duration-500" />
