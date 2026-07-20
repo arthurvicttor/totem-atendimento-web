@@ -3,7 +3,7 @@ import { createBrowserRouter, RouterProvider } from "react-router-dom";
 // Atendimento
 import WelcomePage from "@/pages/atendimento/WelcomePage";
 import MenuPage from "@/pages/atendimento/MenuPage";
-// import CartPage from "@/pages/atendimento/CartPage"
+import CartPage from "@/pages/atendimento/CartPage";
 // import PaymentPage from "@/pages/atendimento/PaymentPage";
 // import ConfirmationPage from "@/pages/atendimento/ConfirmationPage";
 
@@ -15,7 +15,7 @@ const router = createBrowserRouter([
   //  Atendimento
   { path: "/", element: <WelcomePage /> },
   { path: "/menu", element: <MenuPage /> },
-  // { path: "/cart", element: <CartPage /> },
+  { path: "/cart", element: <CartPage /> },
   // { path: "/payment", element: <PaymentPage /> },
   // { path: "/confirmation", element: <ConfirmationPage /> },
 
